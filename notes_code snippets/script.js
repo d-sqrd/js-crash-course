@@ -50,6 +50,7 @@ First order functions:
 ****************************************************************************************************************************
 Higher order functions:
     * function that accepts another function as an argument OR returns another function OR both
+    * The main difference between first-class functions and higher-order functions is that first-class functions are treated like other variables, while higher-order functions can take other functions as arguments or return functions as results
 
 example:
 
@@ -131,9 +132,9 @@ switch(x){
 /*
 ****************************************************************************************************************************
 Temporal dead zone
-    * applicable only for let and const variables
-    * if we try to access a let/const variable before its initialization then reference error is thrown
-    * temporal dead zone is the time between a let or const variable's usage in code and their initialization
+* applicable only for let and const variables
+* if we try to access a let/const variable before its initialization then reference error is thrown
+* temporal dead zone is the time between a let or const variable's usage in code and their initialization
 example:
 
 function myFun() {
@@ -150,4 +151,107 @@ function myFun() {
     let myLetVar = 1;
     const myConstVar = 12;
 }
+****************************************************************************************************************************
+*/
+
+/*
+Pure functions
+****************************************************************************************************************************
+* a pure function is a block of code that will always return the same value for a given input
+* return value has no external dependency(meaning all the dependencies are with the block scoped variables of that function)
+
+example-1:
+
+const calculateSum = (a, b) => a + b // here for given values of a & b, we will always get the same result -> so this is a pure function
+
+example-2:
+
+let offSet = 100;
+const calculateSum = (a, b) => offSet + a + b;    // here since we are using offSet which is present outside the block scope of the calculateSum method, so if offset variables's value changes then the return value of calculateSum method will also change -> so this is not a pure function
+****************************************************************************************************************************
+*/
+
+/*
+****************************************************************************************************************************
+Difference between let and var keywords
+
+function myFun(arg0) {
+    if(arg0) {
+        console.log(myVar1);    // prints undefined since during memory allocation phase that is what var variables are initialized with
+        console.log(myLet1);    // reference error: cannot access let variable before initialization
+        var myVar1 = 100;
+        let myLet1 = 200;
+    }
+    console.log(myVar1);    // prints 100 since var variables are function scoped
+    console.log(myLet1);    // error since let is block scoped
+}
+
+****************************************************************************************************************************
+*/
+
+/*
+****************************************************************************************************************************
+Immediately invoked function
+
+let var1 = 10;
+console.log(var1);   // prints 10
+(function () {
+  var1 = 1000;
+  console.log(var1);             // prints 1000
+})();
+console.log(var1);    // prints 1000
+****************************************************************************************************************************
+*/
+
+/*
+****************************************************************************************************************************
+Function memoization
+* memoization is a technique of caching previously calculated values so that when those values are required in the future then we can return them from the cache without re-performing the operations
+* function memoization is a good example to understand and appreciate closures
+
+example:
+function memoizedFunction() {
+  let cache = {};
+  function performCalculation(arg0) {
+    console.log(cache);
+    if (arg0 in cache) {
+      console.log(`retrieving data from cache...${cache[arg0]}`);
+      return cache[arg0];
+    } else {
+      cache[arg0] = 1000 + arg0;
+      console.log(`calculating and then storing inside cache...${cache[arg0]}`);
+      return cache[arg0];
+    }
+  }
+  return performCalculation;
+}
+const addOne = memoizedFunction();
+addOne(1); // prints: calculating and then storing inside cache...1001
+addOne(1); // prints: retrieving data from cache...1001
+****************************************************************************************************************************
+*/
+
+/*
+****************************************************************************************************************************
+Cookie:
+    * A cookie is a piece of data that is stored on your computer to be accessed by your browser. Cookies are saved as key/value pairs.
+****************************************************************************************************************************
+*/
+
+/*
+ ****************************************************************************************************************************
+ Web storage
+ * Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies. The web storage provides two mechanisms for storing data on the client.
+ * Local storage: It stores data for current origin with no expiration date.
+ * Session storage: It stores data for one session and the data is lost when the browser tab is closed.
+ ****************************************************************************************************************************
+ */
+
+/*
+****************************************************************************************************************************
+3 states of a promise:
+    * Pending: promise is not yet rejected or fulfilled
+    * Fulfilled: async op was successful
+    * Rejected: async op was unsuccessful
+****************************************************************************************************************************
 */
