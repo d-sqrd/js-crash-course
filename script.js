@@ -60,20 +60,57 @@
 // addOne(1); // prints: retrieving data from cache...1001
 
 // Promise chaining
-new Promise((resolve, reject) => {
-  console.log(`Level = 1`);
-  reject("Promise broken :(");
-  resolve(1);
-})
-  .catch((err) => {
-    console.log(`Error = ${err}`);
-  })
-  .then((res) => {
-    console.log(`Level = 2`);
-    return res * 2;
-  })
-  .then((res) => {
-    console.log(`Level = 3`);
-    return res * 3;
-  })
-  .finally(console.log(`Inside finally!`));
+// new Promise((resolve, reject) => {
+//   console.log(`Level = 1`);
+//   reject("Promise broken :(");
+//   resolve(1);
+// })
+//   .catch((err) => {
+//     console.log(`Error = ${err}`);
+//   })
+//   .then((res) => {
+//     console.log(`Level = 2`);
+//     return res * 2;
+//   })
+//   .then((res) => {
+//     console.log(`Level = 3`);
+//     return res * 3;
+//   })
+//   .finally(console.log(`Inside finally!`));
+
+const myBuggyFunction = () => {
+  console.log("Before writing buggy code :(");
+  debugger;
+  console.log("After writing buggy code :) - 1");
+  debugger;
+  console.log("After writing buggy code :) - 2");
+};
+
+// myBuggyFunction();
+
+// const a = 1;
+// const b = 2;
+// const c = a + b;
+// (a + b).toString();
+
+// const obj = {
+//   name: "Debarshi",
+//   age: 25,
+// };
+// for (let [key, val] of Object.entries(obj)) {
+//   console.log(`${key}: ${val}`);
+// }
+
+const obj = {
+  name: "Debarshi",
+  age: 25,
+};
+
+const obj2 = Object.create(obj);
+console.log(obj);
+console.log(obj2);
+obj.name = "Galu";
+console.log(obj);
+console.log(obj2);
+obj2.name = "Rahul";
+console.log(obj2);

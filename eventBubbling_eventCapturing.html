@@ -13,6 +13,11 @@
       h2 {
         color: black;
       }
+      #greatgrandparent {
+        background-color: magenta;
+        width: 400px;
+        height: 400px;
+      }
       #grandparent {
         background-color: green;
         width: 300px;
@@ -35,6 +40,7 @@
     <div>
       <h2>Welcome To GFG</h2>
       <div id="greatgrandparent">
+        Great GrandParent
         <div id="grandparent">
           GrandParent
           <div id="parent">
@@ -50,7 +56,7 @@
       const parent = document.getElementById("parent");
       const child = document.getElementById("child");
 
-      // Changing value of capture parameter as 'true'
+      // Changing value of capture parameter as 'true' -> makes it event capture mode
       greatgrandParent.addEventListener(
         "click",
         (e) => {
@@ -63,7 +69,7 @@
         (e) => {
           console.log("GrandParent");
         },
-        { capture: true }
+        { capture: false }
       );
 
       parent.addEventListener(
@@ -71,7 +77,14 @@
         (e) => {
           console.log("Parent");
         },
-        { capture: true }
+        { capture: false }
+      );
+      parent.addEventListener(
+        "click",
+        (e) => {
+          console.log("Parent");
+        },
+        { capture: false }
       );
       child.addEventListener(
         "click",
