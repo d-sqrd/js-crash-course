@@ -78,13 +78,13 @@
 //   })
 //   .finally(console.log(`Inside finally!`));
 
-const myBuggyFunction = () => {
-  console.log("Before writing buggy code :(");
-  debugger;
-  console.log("After writing buggy code :) - 1");
-  debugger;
-  console.log("After writing buggy code :) - 2");
-};
+// const myBuggyFunction = () => {
+//   console.log("Before writing buggy code :(");
+//   debugger;
+//   console.log("After writing buggy code :) - 1");
+//   debugger;
+//   console.log("After writing buggy code :) - 2");
+// };
 
 // myBuggyFunction();
 
@@ -101,16 +101,62 @@ const myBuggyFunction = () => {
 //   console.log(`${key}: ${val}`);
 // }
 
-const obj = {
-  name: "Debarshi",
-  age: 25,
+// const obj = {
+//   name: "Debarshi",
+//   age: 25,
+// };
+
+// const obj2 = Object.create(obj);
+// console.log(obj);
+// console.log(obj2);
+// obj.name = "Galu";
+// console.log(obj);
+// console.log(obj2);
+// obj2.name = "Rahul";
+// console.log(obj2);
+
+// function printDetails() {
+//   console.log(`Hello, ${this.firstName} ${this.lastName}`);
+// }
+
+let obj3 = {
+  firstName: "Debarshi",
+  printFirstNameArrow: () => {
+    console.log(`arrow = ${this}`);
+  },
+  printFirstName: function () {
+    console.log(`normal = ${JSON.stringify(this)}`);
+  },
+};
+obj3.printFirstNameArrow(); // prints global object sicne printFirstName() is an arrow function
+obj3.printFirstName(); // prints global object sicne printFirstName() is an arrow function
+
+function x() {
+  console.log(`inside x...this = ${this}`);
+  function y() {
+    console.log(`inside y...this = ${this}`);
+  }
+  y();
+  const z = () => {
+    console.log(`inside z...this = ${this}`);
+  };
+  z();
+}
+x();
+
+let obj4 = {
+  firstName: "Debarshi",
+  printFirstName: function () {
+    console.log(`Inside normal function...this = ${this}`);
+    const nestedPrintFirstNameArrow = () => {
+      console.log(`nested arrow function...this = ${this}`);
+    };
+    nestedPrintFirstNameArrow();
+  },
+  printFirstNameArrow: () => {
+    console.log(`Inside arrow function...this = ${this}`);
+  },
 };
 
-const obj2 = Object.create(obj);
-console.log(obj);
-console.log(obj2);
-obj.name = "Galu";
-console.log(obj);
-console.log(obj2);
-obj2.name = "Rahul";
-console.log(obj2);
+obj4.printFirstName();
+obj4.printFirstNameArrow();
