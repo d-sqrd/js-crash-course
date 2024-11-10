@@ -119,44 +119,126 @@
 //   console.log(`Hello, ${this.firstName} ${this.lastName}`);
 // }
 
-let obj3 = {
-  firstName: "Debarshi",
-  printFirstNameArrow: () => {
-    console.log(`arrow = ${this}`);
-  },
-  printFirstName: function () {
-    console.log(`normal = ${JSON.stringify(this)}`);
-  },
-};
-obj3.printFirstNameArrow(); // prints global object sicne printFirstName() is an arrow function
-obj3.printFirstName(); // prints global object sicne printFirstName() is an arrow function
+// let obj3 = {
+//   firstName: "Debarshi",
+//   printFirstNameArrow: () => {
+//     console.log(`arrow = ${this}`);
+//   },
+//   printFirstName: function () {
+//     console.log(`normal = ${JSON.stringify(this)}`);
+//   },
+// };
+// obj3.printFirstNameArrow(); // prints global object sicne printFirstName() is an arrow function
+// obj3.printFirstName(); // prints global object sicne printFirstName() is an arrow function
 
-function x() {
-  console.log(`inside x...this = ${this}`);
-  function y() {
-    console.log(`inside y...this = ${this}`);
-  }
-  y();
-  const z = () => {
-    console.log(`inside z...this = ${this}`);
+// function x() {
+//   console.log(`inside x...this = ${this}`);
+//   function y() {
+//     console.log(`inside y...this = ${this}`);
+//   }
+//   y();
+//   const z = () => {
+//     console.log(`inside z...this = ${this}`);
+//   };
+//   z();
+// }
+// x();
+
+// let myLetVariable = 10;
+// let obj4 = {
+//   firstName: "Debarshi",
+//   printFirstName: function () {
+//     console.log(`myLetVariable = ${myLetVariable}`);
+//     console.log(`Inside normal function...this = ${this}`);
+//     const nestedPrintFirstNameArrow = () => {
+//       console.log(`nested arrow function...this = ${this}`);
+//     };
+//     nestedPrintFirstNameArrow();
+//   },
+//   printFirstNameArrow: () => {
+//     console.log(
+//       `Inside arrow function...myLetVariable = ${this.myLetVariable}`
+//     );
+//     console.log(`Inside arrow function...this = ${this}`);
+//   },
+// };
+
+// obj4.printFirstName();
+// obj4.printFirstNameArrow();
+
+// var myVarVariable = 1;
+// let myLetVariable2 = 100;
+// const myConstVariable = 1000;
+// const obj5 = {
+//   printVariables: function () {
+//     console.log(
+//       `Inside normal printVariables()...myVarVariable = ${myVarVariable}`
+//     );
+//     console.log(
+//       `Inside normal printVariables()...myLetVariable = ${myLetVariable}`
+//     );
+//     console.log(
+//       `Inside normal printVariables()...myConstVariable = ${myConstVariable}`
+//     );
+//     const nestedArrowPrintVariables = () => {
+//       console.log(
+//         `Inside nestedArrowPrintVariables()...myVarVariable = ${myVarVariable}`
+//       );
+//       console.log(
+//         `Inside nestedArrowPrintVariables()...myLetVariable = ${myLetVariable}`
+//       );
+//       console.log(
+//         `Inside nestedArrowPrintVariables()...myConstVariable = ${myConstVariable}`
+//       );
+//     };
+//     nestedArrowPrintVariables();
+//   },
+//   arrowPrintVariables: () => {
+//     console.log(
+//       `Inside arrowPrintVariables()...myVarVariable = ${myVarVariable}`
+//     );
+//     console.log(
+//       `Inside arrowPrintVariables()...myLetVariable = ${myLetVariable}`
+//     );
+//     console.log(
+//       `Inside arrowPrintVariables()...myConstVariable = ${myConstVariable}`
+//     );
+//   },
+// };
+
+// obj5.printVariables();
+// obj5.arrowPrintVariables();
+
+let counter = 0;
+
+const getData = () => {
+  console.log("Fetching data ...", counter++);
+};
+
+// betterFunction creates a closure around the timeOutId variable
+const betterFunction = function (cb, delay) {
+  let timeOutId = null; // timeOutId is defined once in the scope of this closure
+
+  // This function is returned and can access `timeOutId` (because of closure)
+  return () => {
+    if (timeOutId !== null) {
+      clearTimeout(timeOutId); // Clears the previous timeout if it exists
+    }
+
+    // Set a new timeout, updating `timeOutId`
+    timeOutId = setTimeout(() => {
+      cb(); // Calls the callback (getData) after the delay
+    }, delay);
   };
-  z();
-}
-x();
-
-let obj4 = {
-  firstName: "Debarshi",
-  printFirstName: function () {
-    console.log(`Inside normal function...this = ${this}`);
-    const nestedPrintFirstNameArrow = () => {
-      console.log(`nested arrow function...this = ${this}`);
-    };
-    nestedPrintFirstNameArrow();
-  },
-  printFirstNameArrow: () => {
-    console.log(`Inside arrow function...this = ${this}`);
-  },
 };
 
-obj4.printFirstName();
-obj4.printFirstNameArrow();
+// Create a debounced function `handleKeydown` from `betterFunction`
+const handleKeydown = betterFunction(getData, 1000);
+
+// Simulating keydown events to see the closure in action
+handleKeydown(); // Call 1: Creates a timeout, timeOutId is set
+setTimeout(handleKeydown, 200); // Call 2: Clears previous timeout, resets it
+setTimeout(handleKeydown, 500); // Call 3: Clears previous timeout, resets it
+setTimeout(handleKeydown, 800); // Call 4: Clears previous timeout, resets it
+
+// betterFunction will be called after every keystroke, if sequential keystrokes occur before "d" milliseconds, then clear the previous timer and start a new timer

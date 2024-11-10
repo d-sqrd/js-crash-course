@@ -103,9 +103,11 @@ let obj3 = {
 obj3.printFirstNameArrow(); // prints global object sicne printFirstName() is an arrow function
 obj3.printFirstName(); // prints obj3 object
 
+let myLetVariable = 10;
 let obj4 = {
   firstName: "Debarshi",
   printFirstName: function () {
+    console.log(`myLetVariable = ${myLetVariable}`); // prints 10
     console.log(`Inside normal function...this = ${this}`); // obj4 object
     const nestedPrintFirstNameArrow = () => {
       console.log(`nested arrow function...this = ${this}`); // obj4 object
@@ -119,3 +121,46 @@ let obj4 = {
 
 obj4.printFirstName();
 obj4.printFirstNameArrow();
+
+// another small nuance due to "let" and "const" being block scoped(being defined in a space other than the global scope) and "var" being global scoped
+
+var myVarVariable = 1;
+let myLetVariable2 = 100;
+const myConstVariable = 1000;
+
+const obj5 = {
+  printVariables: function () {
+    console.log(
+      `Inside normal printVariables()...myVarVariable = ${myVarVariable}` // prints 1 without any error
+    );
+    console.log(
+      `Inside normal printVariables()...myLetVariable = ${myLetVariable}` // throws error since "let" variables are not global scoped
+    );
+    console.log(
+      `Inside normal printVariables()...myConstVariable = ${myConstVariable}` // prints 1000 without any error
+    );
+    const nestedArrowPrintVariables = () => {
+      console.log(
+        `Inside nestedArrowPrintVariables()...myVarVariable = ${myVarVariable}` // prints 1 without any error
+      );
+      console.log(
+        `Inside nestedArrowPrintVariables()...myLetVariable = ${myLetVariable}` // throws error since "let" variables are not global scoped
+      );
+      console.log(
+        `Inside nestedArrowPrintVariables()...myConstVariable = ${myConstVariable}` // prints 1000 without any error
+      );
+    };
+    nestedArrowPrintVariables();
+  },
+  arrowPrintVariables: () => {
+    console.log(
+      `Inside arrowPrintVariables()...myVarVariable = ${myVarVariable}` // prints 1 without any error
+    );
+    console.log(
+      `Inside arrowPrintVariables()...myLetVariable = ${myLetVariable}` // throws error since "let" variables are not global scoped
+    );
+    console.log(
+      `Inside arrowPrintVariables()...myConstVariable = ${myConstVariable}` // prints 1000 without any error
+    );
+  },
+};
