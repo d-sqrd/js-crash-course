@@ -209,36 +209,19 @@
 // obj5.printVariables();
 // obj5.arrowPrintVariables();
 
-let counter = 0;
-
-const getData = () => {
-  console.log("Fetching data ...", counter++);
+const obj1 = {
+  firstName: "Debarshi",
+  printFirstName: function () {
+    console.log(`First Name = ${this.firstName}`);
+  },
 };
 
-// betterFunction creates a closure around the timeOutId variable
-const betterFunction = function (cb, delay) {
-  let timeOutId = null; // timeOutId is defined once in the scope of this closure
-
-  // This function is returned and can access `timeOutId` (because of closure)
-  return () => {
-    if (timeOutId !== null) {
-      clearTimeout(timeOutId); // Clears the previous timeout if it exists
-    }
-
-    // Set a new timeout, updating `timeOutId`
-    timeOutId = setTimeout(() => {
-      cb(); // Calls the callback (getData) after the delay
-    }, delay);
-  };
+const obj2 = {
+  lastName: "Dutta",
+  printLastName: function () {
+    console.log(`Last Name = ${this.lastName}`);
+  },
 };
 
-// Create a debounced function `handleKeydown` from `betterFunction`
-const handleKeydown = betterFunction(getData, 1000);
-
-// Simulating keydown events to see the closure in action
-handleKeydown(); // Call 1: Creates a timeout, timeOutId is set
-setTimeout(handleKeydown, 200); // Call 2: Clears previous timeout, resets it
-setTimeout(handleKeydown, 500); // Call 3: Clears previous timeout, resets it
-setTimeout(handleKeydown, 800); // Call 4: Clears previous timeout, resets it
-
-// betterFunction will be called after every keystroke, if sequential keystrokes occur before "d" milliseconds, then clear the previous timer and start a new timer
+const obj3 = Object.assign({}, obj1, obj2);
+console.log(obj3);
