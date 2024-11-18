@@ -361,6 +361,10 @@
         const obj2 = Object.create(obj)
         console.log(obj);   // {name: "Debarshi", age: 25}
         console.log(obj2);  // {}...however on checking the prototype chain we can see the "obj" object as {name: "Debarshi", age: 25}
+        console.log(obj.hasOwnProperty(name)); // true
+        console.log(obj.hasOwnProperty(age));  // true
+        console.log(obj2.hasOwnProperty(name)); // false
+        console.log(obj2.hasOwnProperty(age));  // false
         obj.name = "Rahul"
         console.log(obj);   // {name: "Rahul", age: 25}
         console.log(obj2);  // {}...however on checking the prototype chain we can see the "obj" object as {name: "Rahul", age: 25}
@@ -392,5 +396,15 @@
         console.log(arr12.splice(-5, 3));  // [1, 2, 3]
         console.log(arr2);      // [4, 5]
 
-        splice method modifies the existing array
+        1. splice method modifies the existing array
+        2. const arrays are also spliced:
+            const arr = [1, 2, 3, 4, 5]
+            console.log(arr.splice(1, 3));     // [2, 3, 4]
+            console.log(arr);   // [1, 5]
+    * What is the way to find the number of parameters expected by a function?
+
+        function sum(num1, num2, num3, num4) {
+            return num1 + num2 + num3 + num4;
+        }
+        sum.length; // 4 is the number of parameters expected.
  */
