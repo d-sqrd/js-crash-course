@@ -210,18 +210,13 @@
 // obj5.arrowPrintVariables();
 
 const obj1 = {
-  firstName: "Debarshi",
-  printFirstName: function () {
-    console.log(`First Name = ${this.firstName}`);
-  },
+  a: 1,
+  b: 2,
 };
-
 const obj2 = {
-  lastName: "Dutta",
-  printLastName: function () {
-    console.log(`Last Name = ${this.lastName}`);
-  },
+  b: 3,
+  c: 4,
 };
 
-const obj3 = Object.assign({}, obj1, obj2);
-console.log(obj3);
+console.log(Object.assign(obj1, obj2));
+console.log(obj1);

@@ -337,6 +337,11 @@
         const returnedTarget = Object.assign(target, source);
         console.log(target); // { a: 1, b: 3, c: 4 }
         console.log(returnedTarget); // { a: 1, b: 3, c: 4 }
+        
+        const obj1 = {a: 1, b: 2};
+        const obj2 = {b: 3, c: 4};
+        console.log(Object.assign({}, obj1, obj2)); // {a: 1, b: 3, c: 4}
+        console.log(obj1);  //{a: 1, b: 2}
 
     * Object.entries(obj method
     Can be used to iterate over both the key and the corresponding value of an object
@@ -362,4 +367,30 @@
         obj2.name = "Ram";
         console.log(obj2);  // {name: "Ram"}...however on checking the prototype chain we can see the "obj" object as {name: "Rahul", age: 25}
 
+    * Array.slice() method
+        let arr = [1, 2, 3, 4, 5]
+        arr.slice(2);   // [3, 4, 5]
+        arr.slice(1, 4);    // [2, 3, 4]
+        arr.slice(-1);  //  [5]
+        arr.slice(-2);  // [4, 5]
+        arr.slice(-3);  // [3, 4, 5]
+        arr.slice(-4);  // [2, 3, 4, 5]
+        arr.slice(-5);  // [1, 2, 3, 4, 5]
+        arr.slice(-5, 1);   // [1]
+        arr.slice(-5, 2);   // [1, 2]
+        arr.slice(-3, 4);   // [3, 4]
+        arr.slice(-3, 5);   // [3, 4, 5]
+
+        slice() method does not modify the original array and only creates a subset of it
+
+    * Array.splice() method
+        let arr1 = [1, 2, 3, 4, 5]
+        console.log(arr1.splice(1, 4));  // [2, 3, 4]
+        console.log(arr1);      // [1, 5]
+
+        let arr2 = [1, 2, 3, 4, 5]
+        console.log(arr12.splice(-5, 3));  // [1, 2, 3]
+        console.log(arr2);      // [4, 5]
+
+        splice method modifies the existing array
  */
