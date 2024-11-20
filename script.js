@@ -209,17 +209,7 @@
 // obj5.printVariables();
 // obj5.arrowPrintVariables();
 
-const obj1 = {
-  firstName: "Debarshi",
+const foo = (a, b) => {
+  console.log(a);
+  console.log(b);
 };
-
-function add(a, b) {
-  return a + b;
-}
-
-const obj2 = Object.create(obj1);
-console.log(obj2);
-// console.log(obj2.hasOwnProperty("firstName"));
-obj2.lastName = "Dutta";
-console.log(obj2);
-// console.log(obj2.hasOwnProperty("lastName"));
