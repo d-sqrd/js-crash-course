@@ -209,7 +209,6 @@
 // obj5.printVariables();
 // obj5.arrowPrintVariables();
 
-const foo = (a, b) => {
+function(a, b) {
   console.log(a);
-  console.log(b);
-};
+}

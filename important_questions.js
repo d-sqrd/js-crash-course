@@ -401,6 +401,7 @@
             const arr = [1, 2, 3, 4, 5]
             console.log(arr.splice(1, 3));     // [2, 3, 4]
             console.log(arr);   // [1, 5]
+            
     * What is the way to find the number of parameters expected by a function?
         Example-1:
             function sum(num1, num2, num3, num4) {
