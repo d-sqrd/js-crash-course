@@ -8,5 +8,6 @@
 7. All Object related concepts
 8. get and set keywords in JS
 9. Example of strict vs non-strict mode
+10. Decorators
 Continue after: https://github.com/d-sqrd/javascript-interview-questions?tab=readme-ov-file#can-i-add-getters-and-setters-using-defineproperty-method
 */
